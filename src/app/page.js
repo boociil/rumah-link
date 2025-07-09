@@ -1,5 +1,6 @@
 // import Image from "next/image";
 import { prisma } from '@/lib/prisma';
+import Navbar from '@/components/Navbar'
 
 
 export default async function Home() {
@@ -23,6 +24,8 @@ export default async function Home() {
   return (
     <div className="text-black bg-white items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       
+      {/* <Navbar/> */}
+
       <h1 className="w-full font-semibold text-3xl mb-10 text-center">
         Rumah Link Majene
       </h1>
@@ -306,6 +309,18 @@ export default async function Home() {
         </div>
 
       </div>
+
+      <a href='/tambah'>
+
+        <div className='fixed group right-5 bottom-5 shadow-xl transition-all duration-500 border-b-15 border-blue-300 hover:border-b-0 hover:border-t-15 cursor-pointer overflow-hidden text-4xl text-white font-bold flex flex-col items-center justify-center bg-blue-500 rounded-full px-2 py-2 w-15 h-15 text-center'>
+          <p className='group-hover:translate-y-5 -translate-y-15 text-xs transition-all duration-500'>
+            Tambah
+          </p>
+          <p className='group-hover:translate-y-10 -translate-y-2 transition-all duration-500'>
+            +
+          </p>
+        </div>
+      </a>
     </div>
   );
 }
