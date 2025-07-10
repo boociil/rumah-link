@@ -20,7 +20,8 @@ export default async function Home() {
       </h1>
 
       <div className="mb-10 flex justify-center items-center">
-        {tim
+        {Array.isArray(tim) &&
+        tim
           .filter((item) => item.nama.toLowerCase() === "semua")
           .map((tim, idx) => (
             <div key={idx} className="flex justify-center items-center gap-2">
