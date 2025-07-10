@@ -43,7 +43,7 @@ export default function TambahLink() {
         });
         if (response.data.success) {
           console.log("create success");
-          location.reload();
+          router.push("/");
         }
       } catch {
         console.error("Gagal create link:", error);
