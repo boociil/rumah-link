@@ -3,8 +3,6 @@ import { prisma } from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
 
 export default async function Home() {
-
-  
   const tim = await prisma.tim.findMany({
     select: {
       id: true,
@@ -24,12 +22,47 @@ export default async function Home() {
   console.log(tim);
 
   return (
-    <div className="text-black bg-white items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="text-black bg-gray-200 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {/* <Navbar/> */}
 
       <h1 className="w-full font-semibold text-3xl mb-10 text-center">
         Rumah Link Majene
       </h1>
+
+      <div className="mb-10 flex justify-center items-center">
+        {tim
+          .filter((item) => item.nama.toLowerCase() === "semua")
+          .map((tim, idx) => {
+            return (
+              <div key={idx}>
+                { Array.isArray(tim.link) && tim.link.length > 0 &&
+                tim.link.map((link, idx) => {
+                  <a
+                    key={idx}
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full max-w-72"
+                  >
+                    <div className="link-satuan cursor-pointer flex relative overflow-hidden w-full bg-green-500 border-4 group border-green-200 hover:scale-105 hover:border-0 transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24">
+                      <p className="transition-all duration-500 font-semibold text-lg">
+                        {link.detail}
+                      </p>
+                      <div className="bg-gray-100 absolute flex justify-center items-center group-hover:rotate-45 -right-3 -top-3 group-hover:top-0 group-hover:right-0 group-hover:scale-110 transition-all duration-500 opacity-30 group-hover:opacity-70 w-10 h-10 rounded-full">
+                        <span className="material-symbols-outlined">
+                          arrow_upward
+                        </span>
+                      </div>
+                    </div>
+                  </a>;
+                })}
+              </div>
+            );
+          })}
+
+      </div>
+
+      <h1 className="w-full font-semibold text-xl text-center">Per Tim</h1>
 
       <div className="w-full px-1 md:flex gap-3">
         {tim
@@ -54,7 +87,7 @@ export default async function Home() {
                           rel="noopener noreferrer"
                           className="block w-full"
                         >
-                          <div className="link-satuan cursor-pointer flex relative overflow-hidden w-full bg-sky-400 border-4 group border-sky-200 hover:scale-105 hover:border-0 transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24">
+                          <div className="link-satuan cursor-pointer flex relative overflow-hidden w-full bg-emerald-400 border-4 group border-emerald-200 hover:scale-105 hover:border-0 transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24">
                             <p className="transition-all duration-500 font-normal text-md ">
                               {link.detail}
                             </p>
