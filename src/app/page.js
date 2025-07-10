@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
 
 export default async function Home() {
+
+  
   const tim = await prisma.tim.findMany({
     select: {
       id: true,
