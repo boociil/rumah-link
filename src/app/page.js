@@ -3,23 +3,13 @@ import { prisma } from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
 
 export default async function Home() {
-  const tim = await prisma.tim.findMany({
-    select: {
-      id: true,
-      nama: true,
-      links: {
-        select: {
-          detail: true,
-          link: true,
-        },
-      },
-    },
-    orderBy: {
-      id: "asc",
-    },
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/get/link`, {
+    cache: "no-store", // jika ingin fresh setiap reload
   });
 
-  console.log(tim);
+  const json = await res.json();
+  const tim = json.data;
+  // console.log(JSON.stringify(tim));
 
   return (
     <div className="text-black bg-gray-200 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -32,17 +22,17 @@ export default async function Home() {
       <div className="mb-10 flex justify-center items-center">
         {tim
           .filter((item) => item.nama.toLowerCase() === "semua")
-          .map((tim, idx) => {
-            return (
-              <div key={idx}>
-                { Array.isArray(tim.link) && tim.link.length > 0 &&
-                tim.link.map((link, idx) => {
+          .map((tim, idx) => (
+            <div key={idx} className="flex justify-center items-center gap-2">
+              {Array.isArray(tim.links) &&
+                tim.links.length > 0 &&
+                tim.links.map((link, idx) => (
                   <a
                     key={idx}
                     href={link.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full max-w-72"
+                    className="block w-full min-w-36 max-w-72"
                   >
                     <div className="link-satuan cursor-pointer flex relative overflow-hidden w-full bg-green-500 border-4 group border-green-200 hover:scale-105 hover:border-0 transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24">
                       <p className="transition-all duration-500 font-semibold text-lg">
@@ -54,12 +44,10 @@ export default async function Home() {
                         </span>
                       </div>
                     </div>
-                  </a>;
-                })}
-              </div>
-            );
-          })}
-
+                  </a>
+                ))}
+            </div>
+          ))}
       </div>
 
       <h1 className="w-full font-semibold text-xl text-center">Per Tim</h1>
