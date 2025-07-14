@@ -17,6 +17,7 @@ datasource db {
 model Tim {
   id    Int    @id @default(autoincrement())
   nama  String @default("")
+  detail String @default("")
   links Link[] // Relasi: satu Tim punya banyak Link
 }
 

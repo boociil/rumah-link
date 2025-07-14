@@ -1,52 +1,27 @@
 // import React, { useState, useEffect } from "react";
+import { GoHome } from "react-icons/go";
 
 // import { Cookies } from "react-cookie";
 // import { useCookies } from "react-cookie";
-
+// bg-[#f79039] border-4 group border-[#e8cab2]
 // import ava from "../assets/img/picture1.jpeg";
+
 export default function Navbar({ isLoginModal, setIsLoginModal }) {
 
   return (
-    <main className="relative ">
-
-      <nav className="flex justify-between px-8 items-center py-4">
-        <div className="flex items-center gap-8 ">
-          
+    <div className="fixed bottom-10 text-black w-full">
+      <div className="grid grid-cols-3 bg-gradient-to-tr from-[#f79003] to-[#e9bf84] shadow-lg px-2 py-1 mx-4 max-w-lg rounded-lg">
+        <div className="home flex flex-col justify-center items-center">
+          <GoHome className="text-2xl"/>
+          <p className="text-xs text-gray-700">Home</p>
         </div>
-        {/* logo */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          {/* <img src={Logo} alt="Logo" className="mx-auto h-10" />  */}
-            Logo
+        <div className="home flex justify-center items-center">
+          <GoHome className="text-2xl"/>
         </div>
-        {/* sidebar mobile menu */}
-        <div
-          className={`fixed h-full w-screen lg:hidden bg-black/50 backdrop-blur-sm top-0 right-0 transition-all z-50`}
-        >
-          <div className="text-black bg-white flex-col absolute left-0 top-0 h-screen px-4 gap-6 z-50 w-56 flex ">
-            {/* logo */}
-            <div className="flex justify-between items-center py-6">
-              <div className="">
-                {/* <img src={Logo} alt="Logo" className="mx-auto h-6" /> */}
-              </div>
-
-            </div>
-
-          </div>
+        <div className="home flex justify-center items-center">
+          <GoHome className="text-2xl"/>
         </div>
-
-        {/* last section */}
-        <div className="flex items-center gap-4">
-          {/* cart icon */}
-          <div
-            className="cursor-pointer group w-4 md:w-12 transition-all flex duration-500"
-            // onClick={() => setDarkMode(!darkMode)}
-          >
-
-          </div>
-=
-        </div>
-      </nav>
-      <hr className=" " />
-    </main>
+      </div>
+    </div>
   );
 }
