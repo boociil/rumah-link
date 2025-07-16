@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
-import Particles from "react-tsparticles";
+// import Particles from "react-tsparticles";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
