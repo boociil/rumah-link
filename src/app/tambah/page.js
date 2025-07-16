@@ -79,8 +79,8 @@ export default function TambahLink() {
       <div className="form max-w-2xl shadow-lg p-5 rounded-lg bg-white max-h-fit">
         <form onSubmit={onSubmit}>
           <div className="header">
-            <h1 className="font-semibold text-3xl">Kami siap membantu anda</h1>
-            <h3 className="text-gray-600">Simpan URL anda di sini</h3>
+            <h1 className="font-semibold text-3xl">Rumah Link BPS Majene</h1>
+            <h3 className="text-gray-600 text-cen">Simpan URL anda di sini</h3>
           </div>
           <div className="mt-10">
             <div className="mb-2">

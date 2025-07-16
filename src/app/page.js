@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
+import Particles from "react-tsparticles";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
-  const [tim, setTim] = useState();
+  const [tim, setTim] = useState([]);
   const [loading, setLoading] = useState(false);
+ 
   const router = useRouter();
 
   const onTimClick = (id) => {
@@ -14,6 +17,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+
     setLoading(true);
     const fetchData = async () => {
       try {
@@ -29,21 +33,23 @@ export default function Home() {
 
         setTim(json.data);
       } catch (err) {
-        console.error("Gagal fetch data:", err);
+        // fetchData();
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData(); // panggil fungsi async
+    fetchData();
   }, []);
 
   return (
+    <>
+    <Navbar/>
     <div className="text-black bg-gray-200 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      {/* <Navbar/> */}
+      
 
       <h1 className="w-full font-semibold text-3xl mb-10 text-center z-50">
-        Rumah Link Majene
+        Rumah Link BPS Majene
       </h1>
 
       {loading ? (
@@ -88,16 +94,15 @@ export default function Home() {
         </div>
       )}
 
-
       {loading ? (
-        <>
-        </>
+        <></>
+      ) : (
         // <div className="col-span-6 flex justify-center items-center w-full h-40">
         //   {/* tambahkan skeleton kalo bisa */}
         //   <Loading w={10} h={10} />
         // </div>
-      ) : (
         <>
+        
           <h1 className="w-full font-semibold text-xl text-center">Tim</h1>
           <div className="w-full px-1 md:grid md:grid-cols-6 gap-3">
             {Array.isArray(tim) &&
@@ -106,8 +111,11 @@ export default function Home() {
                 .map((tim, idx) => {
                   return (
                     <div className="w-full SECTION" key={idx}>
-                      <div onClick={() => onTimClick(tim.id)} className="nama-tim flex hover:scale-105 hover:border-0 cursor-pointer relative overflow-hidden justify-center w-full bg-sky-400 border-4 group border-sky-200  transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24">
-                        <p className=" transition-all duration-500 text-xl">
+                      <div
+                        onClick={() => onTimClick(tim.id)}
+                        className="nama-tim text-center flex hover:scale-105 hover:border-0 cursor-pointer relative overflow-hidden justify-center w-full bg-sky-400 border-4 group border-sky-200  transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24"
+                      >
+                        <p className=" transition-all duration-500 text-xl text-center">
                           {tim.nama}
                         </p>
                       </div>
@@ -144,16 +152,6 @@ export default function Home() {
         </>
       )}
 
-      <a href="/tambah">
-        <div className="fixed group right-5 bottom-5 shadow-xl transition-all duration-500 border-b-15 border-blue-300 hover:border-b-0 hover:border-t-15 cursor-pointer overflow-hidden text-4xl text-white font-bold flex flex-col items-center justify-center bg-blue-500 rounded-full px-2 py-2 w-15 h-15 text-center">
-          <p className="group-hover:translate-y-5 -translate-y-15 text-xs transition-all duration-500">
-            Tambah
-          </p>
-          <p className="group-hover:translate-y-10 -translate-y-2 transition-all duration-500">
-            +
-          </p>
-        </div>
-      </a>
       {/* <div className="fixed group right-25 bottom-5 shadow-xl transition-all duration-500 border-b-15 border-blue-300 hover:border-b-0 hover:border-t-15 cursor-pointer overflow-hidden text-4xl text-white font-bold flex flex-col items-center justify-center bg-blue-500 rounded-full px-2 py-2 w-15 h-15 text-center">
         <p className="group-hover:translate-y-5 -translate-y-15 text-xs transition-all duration-500">
           Edit
@@ -163,5 +161,6 @@ export default function Home() {
         </p>
       </div> */}
     </div>
+    </>
   );
 }
