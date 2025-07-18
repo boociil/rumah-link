@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Loading from "@/components/Loading";
+import Navbar from "@/components/Navbar";
 
 export default function TambahLink() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -75,6 +76,8 @@ export default function TambahLink() {
   }, [apiUrl]);
 
   return (
+    <>
+    <Navbar />
     <div className="text-black flex justify-center bg-gray-200 min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <div className="form max-w-2xl shadow-lg p-5 rounded-lg bg-white max-h-fit">
         <form onSubmit={onSubmit}>
@@ -154,5 +157,6 @@ export default function TambahLink() {
         </button>
       </div>
     </div>
+    </>
   );
 }

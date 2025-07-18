@@ -1,10 +1,13 @@
-import { prisma } from "@/lib/prisma";
+import  prisma  from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
 
   const body = await req.json();
   const { url, detail, tim } = body; // destructuring nilai yang dikirim client
+  console.log(body);
+  
+
 
   try {
     const createLink = await prisma.link.create({
