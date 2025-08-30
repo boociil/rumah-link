@@ -78,8 +78,8 @@ export default function TambahLink() {
   return (
     <>
     <Navbar />
-    <div className="text-black flex justify-center bg-gray-200 min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <div className="form max-w-2xl shadow-lg p-5 rounded-lg bg-white max-h-fit">
+    <div className="text-black  flex justify-center bg-gray-200 min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <div className="form max-w-2xl md:mt-10 shadow-lg p-5 rounded-lg bg-white max-h-fit">
         <form onSubmit={onSubmit}>
           <div className="header">
             <h1 className="font-semibold text-3xl">Rumah Link BPS Majene</h1>
