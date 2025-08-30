@@ -268,7 +268,7 @@ export default function Home() {
                             className="text-center border-b-2 border-gray-100 py-1 cursor-pointer hover:bg-gray-100 transition-all duration-300"
                           >
                             {
-                              <a href={item.link} key={idx} className="">
+                              <a href={item.link} key={idx} target="_blank" className="">
                                 <div>{item.detail}</div>
                                 <div className="text-xs text-gray-500">
                                   Tim : {item.tim.nama}
