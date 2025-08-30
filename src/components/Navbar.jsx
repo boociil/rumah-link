@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function Navbar({ edit, setEdit }) {
+export default function Navbar({ edit, setEdit, showTim, setShowTim }) {
   const router = useRouter();
-  const [showTim, setShowTim] = useState(false);
+  // const [showTim, setShowTim] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tim, setTim] = useState([]);
   // const [edit, setEdit] = useState(false);
@@ -107,39 +107,67 @@ export default function Navbar({ edit, setEdit }) {
       </div>
 
       <div className="hidden md:fixed top-10 w-full md:flex justify-center items-center z-50">
-            <div className="relative flex justify-between gap-2 opacity-100 bg-gradient-to-tr min-w-96 bg-white max-h-15 shadow-lg px-2 py-2 mx-4 max-w-lg rounded-xl">
-              <div className="bg-gray-100 cursor-pointer w-fit px-1 py-2 rounded-lg" onClick={onHomeClick}>
-                <Image 
-                  src="/logo.png" // gambar disimpan di folder public/images
-                  alt="Logo"
-                  width={25}
-                  height={25}
-                />
-              </div>
-              <div className="grid grid-cols-3 text-black  flex-grow">
-                <div onClick={onTambahClick} className="cursor-pointer flex flex-col justify-center items-center hover:bg-gray-100 rounded-lg transition-all duration-300">
-                  Tambah
-                </div>
-                <div onClick={onTimClick} className="cursor-pointer flex flex-col justify-center items-center hover:bg-gray-100 rounded-lg transition-all duration-300">
-                  Tim
-                </div>
-                <div onClick={() => {setEdit(!edit)}} className={`cursor-pointer flex flex-col justify-center items-center hover:bg-gray-100 rounded-lg transition-all duration-300 ${edit ? "text-red-500" : ""}`}>
-                  {
-                    edit ? (
-                      <div className="font-semibold">
-                        Batalkan
-                      </div>
-                    ) : (
-                      <div>
-                        Edit
-                      </div>
-                    )
-                  }
-                </div>
-              </div>
+        <div className="relative flex justify-between gap-2 opacity-100 bg-gradient-to-tr min-w-96 bg-white max-h-15 shadow-lg px-2 py-2 mx-4 max-w-lg rounded-xl">
+          <div
+            className="bg-gray-100 cursor-pointer w-fit px-1 py-2 rounded-lg"
+            onClick={onHomeClick}
+          >
+            <Image
+              src="/logo.png" // gambar disimpan di folder public/images
+              alt="Logo"
+              width={25}
+              height={25}
+            />
+          </div>
+          <div className="grid grid-cols-3 text-black  flex-grow">
+            <div
+              onClick={onTambahClick}
+              className="cursor-pointer flex flex-col justify-center items-center hover:bg-gray-100 rounded-lg transition-all duration-300"
+            >
+              Tambah
             </div>
+            <div
+              onClick={onTimClick}
+              className="cursor-pointer flex flex-col justify-center items-center hover:bg-gray-100 rounded-lg transition-all duration-300"
+            >
+              Tim
+            </div>
+            <div
+              className={`${
+                showTim ? `absolute` : `hidden`
+              } text-black bg-white rounded-lg -bottom-74 right-18 w-48 px-4 py-2`}
+            >
+              {tim.map((item, idx) => {
+                return (
+                  <div key={idx}>
+                    <div
+                      className="text-center border-b-2 border-gray-100 py-1 cursor-pointer hover:bg-gray-100 transition-all duration-300"
+                      key={idx}
+                      onClick={() => onTimClickDirect(item.id)}
+                    >
+                      {item.nama}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div
+              onClick={() => {
+                setEdit(!edit);
+              }}
+              className={`cursor-pointer flex flex-col justify-center items-center hover:bg-gray-100 rounded-lg transition-all duration-300 ${
+                edit ? "text-red-500" : ""
+              }`}
+            >
+              {edit ? (
+                <div className="font-semibold">Batalkan</div>
+              ) : (
+                <div>Edit</div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-
     </>
   );
 }

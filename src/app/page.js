@@ -9,6 +9,7 @@ import PasswordModal from "@/components/PasswordModal";
 
 export default function Home() {
   const [tim, setTim] = useState([]);
+  const [showTim, setShowTim] = useState(false);
   const [link, setLink] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,6 +21,7 @@ export default function Home() {
   const [edit, setEdit] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
   const [linkId, setLinkId] = useState(null);
+
   const SEARCH_LIMIT = 10;
 
   const router = useRouter();
@@ -158,7 +160,7 @@ export default function Home() {
       <PasswordModal isOpen={passwordModal} onClose={onClose} onSuccess={onSuccess}/>
       <div className="fixed -top-36 -right-72 sm:-right-64 lg:-right-40 w-96 h-96 bg-[#5ECFFF] opacity-70 rounded-full"></div>
       <div className="fixed -bottom-36 -left-72 sm:-left-64 lg:-left-40 w-96 h-96 bg-[#FF8CC7] opacity-70 rounded-full"></div>
-      <Navbar edit={edit} setEdit={setEdit} />
+      <Navbar edit={edit} setEdit={setEdit} showTim={showTim} setShowTim={setShowTim}/>
       <div className="text-black bg-gray-200  items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <h1 className="w-full font-semibold text-3xl md:mt-10 mb-10 text-center relative">
           Rumah Link BPS Majene
@@ -324,15 +326,6 @@ export default function Home() {
             </div>
           </>
         )}
-
-        {/* <div className="fixed group right-25 bottom-5 shadow-xl transition-all duration-500 border-b-15 border-blue-300 hover:border-b-0 hover:border-t-15 cursor-pointer overflow-hidden text-4xl text-white font-bold flex flex-col items-center justify-center bg-blue-500 rounded-full px-2 py-2 w-15 h-15 text-center">
-        <p className="group-hover:translate-y-5 -translate-y-15 text-xs transition-all duration-500">
-          Edit
-        </p>
-        <p className="group-hover:translate-y-10 -translate-y-2 transition-all duration-500">
-          +
-        </p>
-      </div> */}
       </div>
     </>
   );

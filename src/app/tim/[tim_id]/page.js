@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Loading from "@/components/Loading";
+import { useRouter } from "next/navigation";
+import PasswordModal from "@/components/PasswordModal";
 // app/tim/[tim_id]/page.jsx
 
 export default function TimDetail({ params }) {
@@ -12,6 +14,36 @@ export default function TimDetail({ params }) {
   const [link, setLink] = useState([]);
   const [loading, setLoading] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [linkId, setLinkId] = useState(null);
+  const [passwordModal, setPasswordModal] = useState(false);
+  const router = useRouter();
+
+  const onEditLinkClick = (id) => {
+    router.push("/edit/" + id);
+  };
+
+  const onHapusClick = async (id) => {
+    setLinkId(id);
+    setPasswordModal(true);
+  };
+
+
+  const onClose = () => {
+    setPasswordModal(false);
+  };
+
+  const onSuccess = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/delete/link?id=${linkId}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    const result = await res.json();
+    // console.log(result);
+    window.location.reload();
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -41,6 +73,7 @@ export default function TimDetail({ params }) {
 
   return (
     <>
+      <PasswordModal isOpen={passwordModal} onClose={onClose} onSuccess={onSuccess}/>
       <Navbar edit={edit} setEdit={setEdit} />
       <div className="text-black bg-gray-200  items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         {/* <Navbar/> */}
@@ -73,13 +106,38 @@ export default function TimDetail({ params }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`block w-full min-w-36 max-w-72 hover:animate-none ${
-                        edit ? "animate-pulse grid grid-cols-2" : ""
+                        edit ? "animate-pulse" : ""
                       }`}
+                      onClick={edit ? (e) => e.preventDefault() : undefined}
                     >
-                      <div className={"link-satuan cursor-pointer flex relative overflow-hidden w-full bg-emerald-400 border-4 group border-emerald-200 hover:scale-105 hover:border-0 transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24"}>
+                      <div
+                        className={`link-satuan cursor-pointer ${
+                          edit
+                            ? ""
+                            : "flex hover:scale-105 hover:border-0 hover:-translate-y-2"
+                        }  relative overflow-hidden w-full bg-[#f79039] border-4 group border-[#e8cab2]  transition-all duration-500  px-2 py-1 rounded-3xl mt-4 font-semibold items-center shadow-lg h-24`}
+                      >
                         <p className="transition-all duration-500 font-normal text-md ">
                           {item.detail}
                         </p>
+                        <div
+                          className={`${
+                            edit ? "block" : "hidden"
+                          } rounded-lg w-full min-h-6 grid grid-cols-2 font-normal gap-2 bg-white px-2`}
+                        >
+                          <div
+                            className="text-center cursor-pointer hover:bg-gray-200 px-1"
+                            onClick={onEditLinkClick.bind(this, item.id)}
+                          >
+                            Edit
+                          </div>
+                          <div
+                            className="text-center cursor-pointer hover:bg-red-500 hover:text-white px-1"
+                            onClick={onHapusClick.bind(this, item.id)}
+                          >
+                            Hapus
+                          </div>
+                        </div>
                         <div
                           className={`bg-gray-100 absolute flex justify-center items-center group-hover:rotate-45 -right-3 -top-3 group-hover:top-0 group-hover:right-0 group-hover:scale-110 transition-all duration-500 opacity-30 group-hover:opacity-70 w-10 h-10 rounded-full ${
                             edit ? "hidden" : ""
