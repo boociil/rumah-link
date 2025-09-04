@@ -15,10 +15,7 @@ export const metadata = {
   title: "Rumah Link",
   description: "Website untuk menyimpan link penting",
     icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },         // default
-      { url: "/icon.png", type: "image/png" },       // modern browsers
-    ],
+    icon: "/logo.png",
     shortcut: "/favicon.ico",                        // untuk compatibility
     apple: "/apple-touch-icon.png",                  // iOS home screen
   },
