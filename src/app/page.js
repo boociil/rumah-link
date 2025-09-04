@@ -26,6 +26,23 @@ export default function Home() {
 
   const router = useRouter();
 
+  useEffect(() => {
+    // Cek cookie is_login di client
+    if (typeof document !== "undefined") {
+      const cookies = document.cookie.split(";").map((c) => c.trim());
+      const isLogin = cookies.find((c) => c.startsWith("is_login="));
+      if (!isLogin) {
+        router.replace("/password");
+      }
+    }
+  }, []);
+
+  const hapusCookie = () => {
+    document.cookie =
+      "is_login=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.reload();
+  };
+
   const onTimClick = (id) => {
     router.push("/tim/" + id);
   };
@@ -103,7 +120,7 @@ export default function Home() {
     setHasMore(result.data.length === SEARCH_LIMIT);
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     setPasswordModal(false);
   }, [edit]);
 
@@ -157,11 +174,28 @@ export default function Home() {
 
   return (
     <>
-      <PasswordModal isOpen={passwordModal} onClose={onClose} onSuccess={onSuccess}/>
+      <PasswordModal
+        isOpen={passwordModal}
+        onClose={onClose}
+        onSuccess={onSuccess}
+      />
       <div className="fixed -top-36 -right-72 sm:-right-64 lg:-right-40 w-96 h-96 bg-[#5ECFFF] opacity-70 rounded-full"></div>
       <div className="fixed -bottom-36 -left-72 sm:-left-64 lg:-left-40 w-96 h-96 bg-[#FF8CC7] opacity-70 rounded-full"></div>
-      <Navbar edit={edit} setEdit={setEdit} showTim={showTim} setShowTim={setShowTim}/>
+      <Navbar
+        edit={edit}
+        setEdit={setEdit}
+        showTim={showTim}
+        setShowTim={setShowTim}
+      />
       <div className="text-black bg-gray-200  items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+        {/* <div>
+          <button
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            onClick={hapusCookie}
+          >
+            Hapus Cookie Login
+          </button>
+        </div> */}
         <h1 className="w-full font-semibold text-3xl md:mt-10 mb-10 text-center relative">
           Rumah Link BPS Majene
         </h1>
@@ -268,7 +302,12 @@ export default function Home() {
                             className="text-center border-b-2 border-gray-100 py-1 cursor-pointer hover:bg-gray-100 transition-all duration-300"
                           >
                             {
-                              <a href={item.link} key={idx} target="_blank" className="">
+                              <a
+                                href={item.link}
+                                key={idx}
+                                target="_blank"
+                                className=""
+                              >
                                 <div>{item.detail}</div>
                                 <div className="text-xs text-gray-500">
                                   Tim : {item.tim.nama}
