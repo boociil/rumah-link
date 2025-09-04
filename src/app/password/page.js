@@ -9,9 +9,10 @@ export default function PasswordPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === process.env.NEXT_PEGAWAI_PASSWORD) {
+    if (password === process.env.NEXT_PUBLIC_PASSWORD_P) {
       const expires = new Date(Date.now() + 10 * 60 * 1000).toUTCString();
       document.cookie = `is_login=true; path=/; max-age=600; expires=${expires}`;
       router.replace("/");

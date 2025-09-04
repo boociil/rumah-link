@@ -21,9 +21,9 @@ export default function TambahLink() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("URL:", url);
-    console.log("Detail:", detail);
-    console.log("Tim:", tim);
+    // console.log("URL:", url);
+    // console.log("Detail:", detail);
+    // console.log("Tim:", tim);
     // Tambahkan post ke API jika ingin kirim data
   };
 
@@ -43,7 +43,7 @@ export default function TambahLink() {
           detail: detail,
         });
         if (response.data.success) {
-          console.log("create success");
+          // console.log("create success");
           router.push("/");
         }
       } catch {

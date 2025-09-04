@@ -136,7 +136,7 @@ export default function Home() {
         );
 
         const json = await res.json();
-        console.log(json.data);
+        // console.log(json.data);
 
         // console.log("Filtered Tim:", json.data.filter((item) => item.tim.nama.toLowerCase() === "semua"));
 
@@ -157,7 +157,7 @@ export default function Home() {
         );
 
         const json = await res.json();
-        console.log(json.data);
+        // console.log(json.data);
 
         // console.log("Filtered Tim:", json.data.filter((item) => item.tim.nama.toLowerCase() === "semua"));
 

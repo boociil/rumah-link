@@ -57,7 +57,7 @@ export default function TimDetail({ params }) {
         );
 
         const json = await res.json();
-        console.log(json);
+        // console.log(json);
 
         setLink(json.data);
         setTim(json.tim);
