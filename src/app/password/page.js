@@ -15,7 +15,7 @@ export default function PasswordPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === process.env.NEXT_PUBLIC_PASSWORD_P) {
-      const expires = new Date(Date.now() + 10 * 60 * 1000).toUTCString();
+      const expires = new Date(Date.now() + 180 * 60 * 1000).toUTCString();
       document.cookie = `is_login=true; path=/; max-age=600; expires=${expires}`;
       router.replace("/");
     } else {

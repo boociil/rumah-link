@@ -12,6 +12,7 @@ export default function TimDetail({ params }) {
   const { tim_id } = React.use(params);
   const [tim, setTim] = useState();
   const [link, setLink] = useState([]);
+  const [showTim, setShowTim] = useState(false);
   const [loading, setLoading] = useState(false);
   const [edit, setEdit] = useState(false);
   const [linkId, setLinkId] = useState(null);
@@ -74,7 +75,12 @@ export default function TimDetail({ params }) {
   return (
     <>
       <PasswordModal isOpen={passwordModal} onClose={onClose} onSuccess={onSuccess}/>
-      <Navbar edit={edit} setEdit={setEdit} />
+      <Navbar
+              edit={edit}
+              setEdit={setEdit}
+              showTim={showTim}
+              setShowTim={setShowTim}
+            />
       <div className="text-black bg-gray-200  items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         {/* <Navbar/> */}
         {!loading && (
