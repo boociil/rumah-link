@@ -68,8 +68,7 @@ export default function PasswordPage() {
         {error && <div className="text-red-500 text-center mt-2">{error}</div>}
       </div>
       <div className="disclaimer text-gray-400 w-full text-center fixed bottom-4 left-0">
-        Anda memasuki website internal BPS Kabupaten Majene, mohon maaf atas
-        ketidaknyamanannya.
+        Anda memasuki website internal BPS Kabupaten Majene.
         <p className="text-sm leading-relaxed">
            &copy; 2025 Rumah Link - BPS Kabupaten Majene.
         </p>
