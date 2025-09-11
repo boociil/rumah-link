@@ -137,7 +137,9 @@ export default function Navbar({ edit, setEdit, showTim, setShowTim }) {
                 showTim ? `absolute` : `hidden`
               } text-black bg-white rounded-lg -bottom-74 right-18 w-48 px-4 py-2`}
             >
-              {tim.map((item, idx) => {
+              {tim
+                .filter((item) => item.nama !== "Semua")
+                .map((item, idx) => {
                 return (
                   <div key={idx}>
                     <div

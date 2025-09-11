@@ -8,9 +8,10 @@ import Navbar from "@/components/Navbar";
 
 export default function TambahLink() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const [tim, setTim] = useState([]);
+  
   const [url, setUrl] = useState("");
   const [detail, setDetail] = useState("");
+  const [showTim, setShowTim] = useState(false);
   const [tim, setTim] = useState("");
   const [dataTim, setDataTim] = useState([]); // ✅ harus array
   const router = useRouter();
