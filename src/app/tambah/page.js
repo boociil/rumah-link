@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 
 export default function TambahLink() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const [tim, setTim] = useState([]);
   const [url, setUrl] = useState("");
   const [detail, setDetail] = useState("");
   const [tim, setTim] = useState("");
@@ -77,7 +78,10 @@ export default function TambahLink() {
 
   return (
     <>
-    <Navbar />
+    <Navbar
+      showTim={showTim}
+      setShowTim={setShowTim}
+    />
     <div className="text-black  flex justify-center bg-gray-200 min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <div className="form max-w-2xl md:mt-10 shadow-lg p-5 rounded-lg bg-white max-h-fit">
         <form onSubmit={onSubmit}>
