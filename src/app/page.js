@@ -26,22 +26,22 @@ export default function Home() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    // Cek cookie is_login di client
-    if (typeof document !== "undefined") {
-      const cookies = document.cookie.split(";").map((c) => c.trim());
-      const isLogin = cookies.find((c) => c.startsWith("is_login="));
-      if (!isLogin) {
-        router.replace("/password");
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Cek cookie is_login di client
+  //   if (typeof document !== "undefined") {
+  //     const cookies = document.cookie.split(";").map((c) => c.trim());
+  //     const isLogin = cookies.find((c) => c.startsWith("is_login="));
+  //     if (!isLogin) {
+  //       router.replace("/password");
+  //     }
+  //   }
+  // }, []);
 
-  const hapusCookie = () => {
-    document.cookie =
-      "is_login=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.reload();
-  };
+  // const hapusCookie = () => {
+  //   document.cookie =
+  //     "is_login=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+  //   window.location.reload();
+  // };
 
   const onTimClick = (id) => {
     router.push("/tim/" + id);
