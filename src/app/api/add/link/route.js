@@ -7,8 +7,6 @@ export async function POST(req) {
   const { url, detail, tim } = body; // destructuring nilai yang dikirim client
   console.log(body);
   
-
-
   try {
     const createLink = await prisma.link.create({
       data: {
