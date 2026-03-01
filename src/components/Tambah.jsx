@@ -6,7 +6,7 @@ import axios from "axios";
 import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 
-export default function TambahLink() {
+export default function TambahLink({setActive, setTimId}) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const [url, setUrl] = useState("");
@@ -43,6 +43,7 @@ export default function TambahLink() {
           url: url,
           tim: tim,
           detail: detail,
+          details: details,
         });
         if (response.data.success) {
           // console.log("create success");
@@ -51,6 +52,14 @@ export default function TambahLink() {
       } catch {
         console.error("Gagal create link:", error);
       } finally {
+        {
+          if (tim === 7) {
+            setActive("Beranda");
+          }else{
+            setTimId(tim);
+            setActive("Tim");
+          }
+        }
       }
     } else {
       alert("Mohon masukkan url yang valid");
@@ -77,7 +86,7 @@ export default function TambahLink() {
 
   return (
     <>
-      <div className="form max-w-2xl shadow-lg p-5 rounded-4xl bg-white max-h-fit">
+      <div className="form w-full md:h-full p-5 rounded-4xl bg-white">
         <form onSubmit={onSubmit}>
           <div className="header">
             <h1 className="font-semibold text-3xl text-primary">Tambah Link</h1>
@@ -96,7 +105,7 @@ export default function TambahLink() {
                 type="text"
                 name="url"
                 id="url"
-                className="bg-background rounded-lg px-2 py-1 min-w-96"
+                className="bg-background rounded-lg px-2 py-1 w-full md:w-[500px]"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
               />
@@ -110,7 +119,7 @@ export default function TambahLink() {
                 type="text"
                 name="detail"
                 id="detail"
-                className="bg-background rounded-md px-2 py-1 min-w-96"
+                className="bg-background rounded-md px-2 py-1 w-full md:w-[500px]"
                 value={detail}
                 onChange={(e) => setDetail(e.target.value)}
               />
@@ -125,7 +134,7 @@ export default function TambahLink() {
                 name="details"
                 id="details"
                 rows={4}
-                className="bg-background rounded-md px-2 py-2 min-w-96 resize-none"
+                className="bg-background rounded-md px-2 py-2 w-full md:w-[500px] resize-none"
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
               />
@@ -157,7 +166,7 @@ export default function TambahLink() {
           <button
             type="submit"
             // onClick={onSubmit}
-            className="w-full bg-primary  text-center text-white rounded-md mt-6 h-10 font-semibold cursor-pointer"
+            className="w-full md:w-[500px] bg-primary  text-center text-white rounded-2xl mt-6 h-10 font-semibold cursor-pointer"
           >
             Simpan
           </button>

@@ -1,3 +1,5 @@
+// API untuk mengambil semua link pada tim tertentu dengan ID
+
 import prisma from "@/lib/prisma"; // ✅ default import
 import { NextResponse } from "next/server";
 
@@ -10,6 +12,7 @@ export async function GET(req) {
       select: {
         id: true,
         detail: true,
+        details : true,
         link: true,
 
       },

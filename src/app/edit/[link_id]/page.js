@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Loading from "@/components/Loading";
+import Edit from "@/components/Edit";
 import Navbar from "@/components/Navbar";
 
 export default function TambahLink({ params }) {
@@ -73,7 +73,7 @@ export default function TambahLink({ params }) {
       try {
         const response = await axios.get(`${apiUrl}/api/get/link_id?id=${link_id}`);
         if (response.data.success) {
-          console.log(response.data.data);
+          console.log(response.data.data);  
           setUrl(response.data.data.link);
           setDetail(response.data.data.detail);
           setTim(parseInt(response.data.data.timId));

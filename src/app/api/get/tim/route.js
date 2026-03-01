@@ -1,3 +1,5 @@
+// API untuk mengambil semua tim
+
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 

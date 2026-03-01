@@ -7,6 +7,7 @@ export async function GET(req) {
       select: {
         id: true,
         detail: true,
+        details: true,
         link: true,
         tim: {
           select: {

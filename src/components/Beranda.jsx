@@ -12,9 +12,10 @@ export default function Beranda() {
   const [tim, setTim] = useState([]);
   const [showTim, setShowTim] = useState(false);
   const [link, setLink] = useState([]);
-  const [edit, setEdit] = useState(false);
+
   const [passwordModal, setPasswordModal] = useState(false);
   const [linkId, setLinkId] = useState(null);
+  const [isDelete, setIsDelete] = useState(false);
 
   const router = useRouter();
 
@@ -27,9 +28,6 @@ export default function Beranda() {
     setPasswordModal(false);
   };
 
-  const onEditLinkClick = (id) => {
-    router.push("/edit/" + id);
-  };
 
   const onSuccess = async () => {
     const res = await fetch(
@@ -40,13 +38,8 @@ export default function Beranda() {
     );
 
     const result = await res.json();
-    // console.log(result);
-    window.location.reload();
+    setIsDelete(!isDelete);
   };
-
-  useEffect(() => {
-    setPasswordModal(false);
-  }, [edit]);
 
   useEffect(() => {
     setLoading(true);
@@ -94,7 +87,7 @@ export default function Beranda() {
     };
     fetchDataTim();
     fetchData();
-  }, []);
+  }, [isDelete]);
 
   return (
     <>
@@ -110,7 +103,7 @@ export default function Beranda() {
             <Loading w={10} h={10} />
           </div>
         ) : (
-          <div className="mb-10 grid lg:grid-cols-6 gap-4">
+          <div className="mb-10 grid lg:grid-cols-4 xl:grid-cols-6 gap-4 md:grid-cols-3 grid-cols-2 mx-4">
             {Array.isArray(link) &&
               link
                 .filter((item) => item.tim.nama.toLowerCase() === "semua")
@@ -120,9 +113,8 @@ export default function Beranda() {
                         id={link.id}
                         link={link.link}
                         title={link.detail}
-                        detail={"Detail yang menjelaskan tentang link ini."}
+                        detail={link.details}
                         onHapusClick={onHapusClick}
-                        onEditLinkClick={onEditLinkClick}
                     />
                 //   <div key={idx} className="">
                 //     <div

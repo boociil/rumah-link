@@ -9,7 +9,9 @@ import Beranda from "@/components/Beranda";
 import Tim from "@/components/Tim";
 import Tambah from "@/components/Tambah";
 
+
 export default function Home() {
+  const [timId, setTimId] = useState(0);
   const [tim, setTim] = useState([]);
   const [showTim, setShowTim] = useState(false);
   const [link, setLink] = useState([]);
@@ -20,7 +22,6 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [onFocusSearch, setOnFocusSearch] = useState(false);
   const [loadingSearch, setLoadingSearch] = useState(false);
-  const [edit, setEdit] = useState(false);
   
   const [active, setActive] = useState("Beranda");
 
@@ -50,10 +51,9 @@ export default function Home() {
   };
 
   const onTimClick = (id) => {
-    router.push("/tim/" + id);
+    // router.push("/tim/" + id);
+    setTimId(id);
   };
-
-
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -105,9 +105,19 @@ export default function Home() {
   };
 
 
+  let content;
+  if (active === "Beranda") {
+    content = <Beranda  />;
+  } else if (active === "Tim" && timId !== 0) {
+    content = <Tim id={timId} />;
+  } else if (active === "Tambah") {
+    content = <Tambah setActive={setActive} setTimId={setTimId} />;
+  } else {
+    content = <Beranda />;
+  }
+
   return (
     <>
-      
       {/* Navbar Old */}
       <Navbar
         // edit={edit}
@@ -116,21 +126,18 @@ export default function Home() {
         // setShowTim={setShowTim}
       />
 
-      <div className="text-black bg-background flex min-h-screen gap-8 pt-[88px] ">
 
 
+      <div className="text-black bg-background flex min-h-screen max-h-screen gap-8 pt-[88px] ">
         <Sidebar
           onSideBarClick={onSideBarClick}
           active={active}
+          onTimClick={onTimClick}
+          timActive={timId}
         />
 
-        <div className="content w-full mr-4 mb-4 rounded-4xl">
-          {
-            active === "Beranda" ? <Beranda /> :
-            active === "Tim" ? <Tim onTimClick={onTimClick} /> :
-            active === "Tambah" ? <Tambah /> :
-            <Beranda />
-          }
+        <div className="content w-full ml-4 md:ml-0 mr-4 mb-4 rounded-4xl">
+          {content}
         </div>
       </div>
     </>

@@ -1,3 +1,5 @@
+// API untuk mengambil semua link dengan pagination dan pencarian
+
 import prisma from "@/lib/prisma"; // ✅ default import
 import { NextResponse } from "next/server";
 

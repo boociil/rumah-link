@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
 
   const body = await req.json();
-  const { url, detail, tim } = body; // destructuring nilai yang dikirim client
+  const { url, detail, tim , details} = body; // destructuring nilai yang dikirim client
   console.log(body);
   
   try {
@@ -13,6 +13,7 @@ export async function POST(req) {
         timId : parseInt(tim),
         link : url,
         detail : detail,
+        details: details,
       },
     });
 
