@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config) => {
+    return config
+  },
   experimental: {
     // App Router tetap aktif
     appDir: true,
