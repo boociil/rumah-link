@@ -34,7 +34,7 @@ export default function LinkBox({
       <div
         className={`
             ${hoveredBox ? "shadow-md" : ""}
-        link-box bg-white md:min-w-56 min-h-32 rounded-3xl md:px-4 py-1 cursor-pointer flex overflow-hidden transition-all duration-300 relative`}
+        link-box bg-white md:min-w-32 min-h-32 rounded-3xl md:px-4 py-1 cursor-pointer flex overflow-hidden transition-all duration-300 relative`}
         onMouseEnter={() => setHoveredBox(true)}
         onMouseLeave={() => setHoveredBox(false)}
         onClick={handleDivClick}
